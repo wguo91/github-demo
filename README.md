@@ -125,6 +125,42 @@ git config --global mergetool.p4merge /Applications/p4merge.app/Contents/MacOS/p
 git config --global mergetool.prompt false
 ```
 
+Compare differences between working directory and staging area
+```
+git diff
+git difftool
+```
 
+Compare differences between working directory and git repository (last commit)
+```
+git diff HEAD
+git difftool HEAD
+```
+
+Compare differences between staging area and git repository (last commit) 
+```
+git diff --staged HEAD
+git difftool --staged HEAD
+```
+
+Limit diff to only one file
+```
+git diff -- file.txt
+git difftool -- file.txt
+```
+
+Compare arbitrary commit to last commit, HEAD refers to last commit in current branch
+```
+git log --oneline
+git diff e9ac0a0 HEAD 
+git diff e9ac0a0 a3ed055 
+
+```
+
+Compare HEAD and the one commit before HEAD
+```
+git diff HEAD HEAD^
+git difftool HEAD HEAD^
+```
 
 
