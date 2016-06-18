@@ -115,6 +115,15 @@ file pattern: *.ext
 folder: my-folder/
 ```
 
+Set P4Merge as the designated diff and merge tool and disable prompts for both
+```
+git config --global diff.tool p4merge
+git config --global difftool.p4merge.path /Applications/p4merge.app/Contents/MacOS/p4merge
+git config --global difftool.prompt false
+git config --global merge.tool p4merge
+git config --global mergetool.p4merge /Applications/p4merge.app/Contents/MacOS/p4merge
+git config --global mergetool.prompt false
+```
 
 
 
