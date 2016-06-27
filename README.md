@@ -32,14 +32,14 @@ Sample commit message (root-commit means this is the FIRST commit of the reposit
 [master (root-commit) 5e93393] Adding new file with hipster ipsum I can use multiple line commit messages
 ```
 
-origin is a reference to our github repository (remote reference, the name "origin" is a convention), master refers to the master branch of a repository
+origin is a reference to our github repository (remote reference, the name "origin" is a convention), master refers to the master branch of a repository, always pull before you push for best practice
 ```
 On branch master
 Your branch is up-to-date with 'origin/master'.
 nothing to commit, working directory clean
 ```
 
-Always pull before you push for best practice (below is a local master push to remote master push)
+Below is a local master push to remote master push result (hence the two masters)
 ```
 To https://github.com/wguo91/starter-web.git
    4beb7f0..2a259e0  master -> master
@@ -73,7 +73,7 @@ git reset HEAD file.txt
 git checkout -- file.txt
 ```
 
--A will recursively add changes and update files that have been renamed, moved, or deleted outside git(git add -A is equivalent to git add . followed by git add -u)
+-A will recursively add changes and update files that have been renamed, moved, or deleted outside git (git add -A is equivalent to git add . followed by git add -u)
 ```
 git add -A
 ```
@@ -149,12 +149,11 @@ git diff -- file.txt
 git difftool -- file.txt
 ```
 
-Compare arbitrary commit to last commit, HEAD refers to last commit in current branch
+Compare arbitrary commit to last commit, HEAD is a ref (reference) to the currently checked out commit of the current branch
 ```
 git log --oneline
 git diff e9ac0a0 HEAD 
 git diff e9ac0a0 a3ed055 
-
 ```
 
 Compare HEAD and the one commit before HEAD
@@ -162,5 +161,87 @@ Compare HEAD and the one commit before HEAD
 git diff HEAD HEAD^
 git difftool HEAD HEAD^
 ```
+
+Compare master branch on local repository and the master branch on git repository
+```
+git diff master origin/master
+git difftool master origin/master
+```
+
+List local branches 
+```
+git branch
+```
+
+List local and remote branches 
+```
+git branch -a
+```
+
+Create branch and switch to the new branch, remember that branches are simply pointers 
+```
+git branch mynewbranch
+git checkout mynewbranch
+```
+
+Rename branch and delete branch (cannot delete branch you are currently on)
+```
+git branch -m mynewbranch newbranch
+git branch -d newbranch
+```
+
+b parameter will create the branch before checking it out (the branch did not exist previously)
+```
+git checkout -b title-change
+```
+
+Switch back to master after changes to your feature branch, then merge the changes from feature (fast-forward branch merge), note that no changes were done on the master branch previously; we can delete the feature branch once the change has been merged
+```
+git merge title-change
+```
+
+Non fast-forward branch merge, so we use --no-ff to disable the fast-forward capability to preserve the fact that we branched off
+```
+git merge --no-ff
+```
+
+Merge with message parameter (automatic merge)
+```
+git merge simple-change -m "merging changes from simple-change"
+```
+
+Invoke p4merge to resolve the conficts (we can do this manually if desired)
+```
+git mergetool
+```
+
+Remove untracked files (first one tells user what git clean -f will do)
+``` 
+git clean -n
+git clean -f 
+```
+
+Rebasing (on feature branch) is another method to merge two branches together, this involves replaying features that were committed on one branch and replaying them on top of another; use it to incorporate master branch changes into your current feature branch to prevent merging headaches later on
+```
+git rebase master 
+```
+
+Rebase options (add your changes first)
+```
+When you have resolved this problem, run "git rebase --continue". 
+If you prefer to skip this patch, run "git rebase --skip" instead. 
+To check out the original branch and stop rebasing, run "git rebase --abort".
+```
+
+Fetch is a non-destructive command that updates the references between the remote and the local repositories
+```
+git fetch origin master
+```
+
+Pull with rebase (in case you need to grab whatever changes that were made on the remote master branch)
+```
+git pull --rebase origin master
+```
+
 
 
