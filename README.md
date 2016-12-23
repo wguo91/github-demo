@@ -78,9 +78,9 @@ git checkout -- file.txt
 git add -A
 ```
 
-Renaming in OSX Finder will result in a .DS_Store (operating system file), so we need to add the correct files individually and then tell git we renamed the file using the -u flag 
+Renaming in OSX Finder will result in a .DS_Store (operating system file), so we need to add the correct files individually and then tell git we renamed the file using the -u flag (note that git add -u adds files that have been deleted, git add . does not)
 ```
-git add -u
+git add 
 ```
 
 Other helpful options, including commit histories (git log displays in reverse chronological order), abbreviated SHA1 identifiers, displaying commits in a decorated graph, displaying a range of commits, displaying commits from a certain time period, displaying commits involving a certain file, displaying commits that follow the renames of a certain file, displaying diff information for a certain commit
